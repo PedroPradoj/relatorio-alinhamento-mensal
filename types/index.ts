@@ -11,6 +11,14 @@ export interface MonthData {
 export type YearData = Record<number, MonthData>; // key = 0-11 (month index)
 export type AllData = Record<number, YearData>; // key = year
 
+export interface Client {
+  id: string;
+  name: string;
+  createdAt: string; // ISO date string
+}
+
+export type ClientsIndex = Record<string, Client>; // id -> Client
+
 export const MONTH_NAMES = [
   "Janeiro",
   "Fevereiro",

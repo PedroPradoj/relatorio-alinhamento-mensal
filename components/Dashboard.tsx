@@ -8,26 +8,31 @@ import YearSelector from "./YearSelector";
 import ExportButtons from "./ExportButtons";
 import ThemeToggle from "./ThemeToggle";
 
-export default function Dashboard() {
+interface DashboardProps {
+  clientId: string;
+  clientName: string;
+  onBack: () => void;
+}
+
+export default function Dashboard({ clientId, clientName, onBack }: DashboardProps) {
   const [allData, setAllData] = useState<AllData>({});
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const stored = loadData();
-    setAllData(stored);
+    setAllData(loadData(clientId));
     setHydrated(true);
-  }, []);
+  }, [clientId]);
 
   const handleUpdate = useCallback(
     (monthIndex: number, data: MonthData) => {
       setAllData((prev) => {
         const updated = updateMonth(prev, year, monthIndex, data);
-        saveData(updated);
+        saveData(clientId, updated);
         return updated;
       });
     },
-    [year]
+    [year, clientId]
   );
 
   const getMonthData = (idx: number): MonthData =>
@@ -76,7 +81,20 @@ export default function Dashboard() {
       <header className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              {/* Back button */}
+              <button
+                onClick={onBack}
+                className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/20 hover:bg-white/30 text-white transition-all shrink-0"
+                aria-label="Voltar para clientes"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              <div className="w-px h-8 bg-white/20" />
+
               <div className="w-11 h-11 rounded-2xl bg-white/20 backdrop-blur flex items-center justify-center shadow-inner shrink-0">
                 <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
@@ -84,10 +102,10 @@ export default function Dashboard() {
               </div>
               <div>
                 <h1 className="text-xl sm:text-2xl font-extrabold text-white leading-tight tracking-tight">
-                  Relatório Mensal
+                  {clientName}
                 </h1>
                 <p className="text-indigo-200 text-sm font-medium mt-0.5">
-                  Meta Ads · Social Media Manager
+                  Relatório Mensal · Meta Ads
                 </p>
               </div>
             </div>
@@ -131,7 +149,7 @@ export default function Dashboard() {
         </div>
 
         <footer className="mt-12 text-center text-xs text-gray-400 dark:text-gray-600 pb-8">
-          Dados salvos localmente no navegador · {year}
+          {clientName} · Dados salvos localmente no navegador · {year}
         </footer>
       </main>
     </div>
