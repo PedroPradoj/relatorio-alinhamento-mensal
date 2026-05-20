@@ -1,11 +1,9 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useRouter } from "next/navigation";
 import { AllData, MonthData, EMPTY_MONTH } from "@/types";
 import { updateMonth } from "@/lib/storage";
 import { fetchClientData, upsertMonth } from "@/lib/supabase";
-import { createSupabaseBrowser } from "@/lib/supabase-browser";
 import MonthCard from "./MonthCard";
 import YearSelector from "./YearSelector";
 import ExportButtons from "./ExportButtons";
@@ -18,16 +16,8 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ clientId, clientName, onBack }: DashboardProps) {
-  const router = useRouter();
   const [allData, setAllData] = useState<AllData>({});
   const [year, setYear] = useState<number>(new Date().getFullYear());
-
-  async function handleLogout() {
-    const supabase = createSupabaseBrowser();
-    await supabase.auth.signOut();
-    router.push("/login");
-    router.refresh();
-  }
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
@@ -127,16 +117,6 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
               <YearSelector year={year} onYearChange={setYear} />
               <ThemeToggle />
               <ExportButtons data={allData} year={year} />
-              <button
-                onClick={handleLogout}
-                className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/20 hover:bg-white/30 text-white transition-all"
-                aria-label="Sair"
-                title="Sair"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                </svg>
-              </button>
             </div>
           </div>
         </div>

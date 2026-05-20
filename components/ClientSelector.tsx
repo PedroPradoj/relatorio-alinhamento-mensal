@@ -1,9 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Client, ClientsIndex } from "@/types";
-import { createSupabaseBrowser } from "@/lib/supabase-browser";
 import ThemeToggle from "./ThemeToggle";
 import NewClientModal from "./NewClientModal";
 
@@ -51,17 +49,9 @@ export default function ClientSelector({
   onCreate,
   onDelete,
 }: ClientSelectorProps) {
-  const router = useRouter();
   const [showModal, setShowModal] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
   const [copiedId, setCopiedId] = useState<string | null>(null);
-
-  async function handleLogout() {
-    const supabase = createSupabaseBrowser();
-    await supabase.auth.signOut();
-    router.push("/login");
-    router.refresh();
-  }
 
   function handleCopyLink(e: React.MouseEvent, clientId: string) {
     e.stopPropagation();
@@ -108,16 +98,6 @@ export default function ClientSelector({
             </div>
             <div className="flex items-center gap-2">
               <ThemeToggle />
-              <button
-                onClick={handleLogout}
-                className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/20 hover:bg-white/30 text-white transition-all"
-                aria-label="Sair"
-                title="Sair"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                </svg>
-              </button>
               <button
                 onClick={() => setShowModal(true)}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-indigo-600 text-sm font-bold hover:bg-indigo-50 transition-all shadow-lg"
