@@ -2,12 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { Client, ClientsIndex } from "@/types";
-import {
-  loadClients,
-  saveClient,
-  deleteClient,
-  generateClientId,
-} from "@/lib/storage";
+import { generateClientId } from "@/lib/storage";
+import { fetchClients, createClient_, removeClient } from "@/lib/supabase";
 import ClientSelector from "@/components/ClientSelector";
 import Dashboard from "@/components/Dashboard";
 
@@ -17,23 +13,25 @@ export default function Home() {
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    setClients(loadClients());
-    setHydrated(true);
+    fetchClients().then((data) => {
+      setClients(data);
+      setHydrated(true);
+    });
   }, []);
 
-  function handleCreate(name: string) {
+  async function handleCreate(name: string) {
     const client: Client = {
       id: generateClientId(),
       name,
       createdAt: new Date().toISOString(),
     };
-    saveClient(client);
+    await createClient_(client);
     setClients((prev) => ({ ...prev, [client.id]: client }));
     setSelectedClient(client);
   }
 
-  function handleDelete(clientId: string) {
-    deleteClient(clientId);
+  async function handleDelete(clientId: string) {
+    await removeClient(clientId);
     setClients((prev) => {
       const next = { ...prev };
       delete next[clientId];

@@ -2,7 +2,8 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { AllData, MonthData, EMPTY_MONTH } from "@/types";
-import { loadData, saveData, updateMonth } from "@/lib/storage";
+import { updateMonth } from "@/lib/storage";
+import { fetchClientData, upsertMonth } from "@/lib/supabase";
 import MonthCard from "./MonthCard";
 import YearSelector from "./YearSelector";
 import ExportButtons from "./ExportButtons";
@@ -20,17 +21,19 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
   const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    setAllData(loadData(clientId));
-    setHydrated(true);
+    fetchClientData(clientId).then((data) => {
+      setAllData(data);
+      setHydrated(true);
+    });
   }, [clientId]);
 
   const handleUpdate = useCallback(
     (monthIndex: number, data: MonthData) => {
       setAllData((prev) => {
         const updated = updateMonth(prev, year, monthIndex, data);
-        saveData(clientId, updated);
         return updated;
       });
+      upsertMonth(clientId, year, monthIndex, data);
     },
     [year, clientId]
   );
