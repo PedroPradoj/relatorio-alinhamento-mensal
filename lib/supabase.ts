@@ -23,12 +23,14 @@ export async function fetchClients(): Promise<ClientsIndex> {
 }
 
 export async function createClient_(client: Client): Promise<void> {
-  await supabase.from("clients").insert({
+  const { error } = await supabase.from("clients").insert({
     id: client.id,
     name: client.name,
     created_at: client.createdAt,
   });
+  if (error) console.error("createClient_ error:", error);
 }
+
 
 export async function removeClient(clientId: string): Promise<void> {
   await supabase.from("monthly_reports").delete().eq("client_id", clientId);
