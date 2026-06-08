@@ -8,6 +8,7 @@ import MonthCard from "./MonthCard";
 import YearSelector from "./YearSelector";
 import ExportButtons from "./ExportButtons";
 import ThemeToggle from "./ThemeToggle";
+import AnalyticsDashboard from "./AnalyticsDashboard";
 
 interface DashboardProps {
   clientId: string;
@@ -19,6 +20,7 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
   const [allData, setAllData] = useState<AllData>({});
   const [year, setYear] = useState<number>(new Date().getFullYear());
   const [hydrated, setHydrated] = useState(false);
+  const [view, setView] = useState<"dados" | "dashboard">("dados");
 
   useEffect(() => {
     fetchClientData(clientId).then((data) => {
@@ -122,8 +124,27 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
         </div>
       </header>
 
+      {/* Tab bar */}
+      <div className="bg-[#101013] border-b border-brand-700/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-1">
+          {(["dados", "dashboard"] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setView(tab)}
+              className={`px-5 py-3 text-sm font-semibold capitalize transition-all border-b-2 ${
+                view === tab
+                  ? "border-brand-500 text-brand-400"
+                  : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-300 hover:border-gray-600"
+              }`}
+            >
+              {tab === "dados" ? "Dados" : "Dashboard"}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Summary Bar */}
-      {(totalInvestimento > 0 || totalFaturamento > 0) && (
+      {view === "dados" && (totalInvestimento > 0 || totalFaturamento > 0) && (
         <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur border-b border-gray-200 dark:border-gray-700 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -136,24 +157,29 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
         </div>
       )}
 
-      {/* Cards Grid */}
+      {/* Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {Array.from({ length: 12 }, (_, i) => (
-            <MonthCard
-              key={i}
-              monthIndex={i}
-              monthData={getMonthData(i)}
-              previousMonthData={getPrevMonthData(i)}
-              year={year}
-              onUpdate={(data) => handleUpdate(i, data)}
-            />
-          ))}
-        </div>
-
-        <footer className="mt-12 text-center text-xs text-gray-400 dark:text-gray-600 pb-8">
-          {clientName} · Dados salvos localmente no navegador · {year}
-        </footer>
+        {view === "dados" ? (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {Array.from({ length: 12 }, (_, i) => (
+                <MonthCard
+                  key={i}
+                  monthIndex={i}
+                  monthData={getMonthData(i)}
+                  previousMonthData={getPrevMonthData(i)}
+                  year={year}
+                  onUpdate={(data) => handleUpdate(i, data)}
+                />
+              ))}
+            </div>
+            <footer className="mt-12 text-center text-xs text-gray-400 dark:text-gray-600 pb-8">
+              {clientName} · {year}
+            </footer>
+          </>
+        ) : (
+          <AnalyticsDashboard allData={allData} year={year} />
+        )}
       </main>
     </div>
   );
