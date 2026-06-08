@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,7 +19,7 @@ export default function LoginPage() {
       const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ login, password }),
       });
 
       if (res.ok) {
@@ -57,16 +57,16 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="flex flex-col gap-1.5">
               <label className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8A8A8A]">
-                Usuário
+                E-mail ou usuário
               </label>
               <input
                 type="text"
                 autoComplete="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                value={login}
+                onChange={(e) => setLogin(e.target.value)}
                 required
                 className="bg-[#0D0D0F] border border-white/10 rounded-xl px-4 py-3 text-sm font-medium text-white placeholder:text-gray-600 outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 transition-all"
-                placeholder="seu usuário"
+                placeholder="seu e-mail ou usuário"
               />
             </div>
 
@@ -93,7 +93,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              disabled={loading || !username || !password}
+              disabled={loading || !login || !password}
               className="mt-1 py-3 rounded-lg bg-gradient-to-r from-brand-400 to-brand-500 text-[#1A1306] text-sm font-semibold hover:shadow-gold disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2"
             >
               {loading && (
