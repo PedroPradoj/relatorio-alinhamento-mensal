@@ -6,11 +6,14 @@ const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient(supabaseUrl, supabaseKey);
 
+const CLIENTS_TABLE = "relatorio_clients";
+const REPORTS_TABLE = "relatorio_monthly_reports";
+
 // ── Clients ────────────────────────────────────────────────────────────────
 
 export async function fetchClients(): Promise<ClientsIndex> {
   const { data, error } = await supabase
-    .from("clients")
+    .from(CLIENTS_TABLE)
     .select("*")
     .order("created_at", { ascending: false });
 
@@ -23,7 +26,7 @@ export async function fetchClients(): Promise<ClientsIndex> {
 }
 
 export async function createClient_(client: Client): Promise<void> {
-  const { error } = await supabase.from("clients").insert({
+  const { error } = await supabase.from(CLIENTS_TABLE).insert({
     id: client.id,
     name: client.name,
     created_at: client.createdAt,
@@ -31,17 +34,16 @@ export async function createClient_(client: Client): Promise<void> {
   if (error) console.error("createClient_ error:", error);
 }
 
-
 export async function removeClient(clientId: string): Promise<void> {
-  await supabase.from("monthly_reports").delete().eq("client_id", clientId);
-  await supabase.from("clients").delete().eq("id", clientId);
+  await supabase.from(REPORTS_TABLE).delete().eq("client_id", clientId);
+  await supabase.from(CLIENTS_TABLE).delete().eq("id", clientId);
 }
 
 // ── Monthly reports ────────────────────────────────────────────────────────
 
 export async function fetchClientData(clientId: string): Promise<AllData> {
   const { data, error } = await supabase
-    .from("monthly_reports")
+    .from(REPORTS_TABLE)
     .select("*")
     .eq("client_id", clientId);
 
@@ -69,7 +71,7 @@ export async function upsertMonth(
   month: number,
   data: MonthData
 ): Promise<void> {
-  await supabase.from("monthly_reports").upsert(
+  await supabase.from(REPORTS_TABLE).upsert(
     {
       client_id: clientId,
       year,
