@@ -24,7 +24,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased bg-stone-50 dark:bg-[#0B0B0D] transition-colors duration-300">
+      <body className="antialiased bg-stone-50 dark:bg-[#0D0D0F] transition-colors duration-300">
         {children}
       </body>
     </html>

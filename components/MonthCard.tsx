@@ -101,8 +101,8 @@ export default function MonthCard({
 
   return (
     <div
-      className={`bg-white dark:bg-gray-800 rounded-3xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden flex flex-col ${
-        hasData ? "ring-1 ring-brand-200 dark:ring-brand-900/60" : ""
+      className={`bg-white dark:bg-[#15151A] rounded-2xl border border-gray-100 dark:border-white/5 shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden flex flex-col ${
+        hasData ? "ring-1 ring-brand-200 dark:ring-brand-800/50" : ""
       }`}
     >
       {/* Month Header */}

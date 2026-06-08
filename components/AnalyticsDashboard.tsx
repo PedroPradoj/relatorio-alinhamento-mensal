@@ -73,11 +73,11 @@ function KpiCard({
   const isGood = change !== null ? (invertColors ? !isPositive : isPositive) : null;
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-100 dark:border-gray-700 shadow-card flex flex-col gap-2">
-      <p className="text-[11px] font-semibold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+    <div className="bg-white dark:bg-[#15151A] rounded-2xl p-5 border border-gray-100 dark:border-white/5 shadow-card flex flex-col gap-2">
+      <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8A8A8A]">
         {label}
       </p>
-      <p className="font-display text-2xl font-bold text-gray-900 dark:text-gray-50 leading-none">
+      <p className="text-2xl font-semibold tabular-nums text-gray-900 dark:text-white leading-none">
         {empty ? "—" : value}
       </p>
       {!empty && change !== null && (
@@ -133,8 +133,8 @@ function YearChart({
   const hasLine = months.some((m) => m.inv > 0);
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-2xl p-5 border border-gray-100 dark:border-gray-700 shadow-card">
-      <h3 className="font-display text-base font-bold text-gray-700 dark:text-gray-200 mb-4">
+    <div className="bg-white dark:bg-[#15151A] rounded-2xl p-5 border border-gray-100 dark:border-white/5 shadow-card">
+      <h3 className="text-base font-bold text-gray-700 dark:text-gray-200 mb-4">
         Evolução Anual · {year}
       </h3>
 
@@ -301,7 +301,7 @@ export default function AnalyticsDashboard({ allData, year }: Props) {
           <select
             value={primary}
             onChange={(e) => setPrimary(Number(e.target.value))}
-            className="bg-white dark:bg-gray-800 border-2 border-brand-400 dark:border-brand-600 text-gray-800 dark:text-gray-100 text-sm font-semibold rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-brand-200 dark:focus:ring-brand-900/50 transition-all cursor-pointer"
+            className="bg-white dark:bg-[#15151A] border-2 border-brand-400 dark:border-brand-600 text-gray-800 dark:text-gray-100 text-sm font-semibold rounded-xl px-4 py-2 outline-none focus:ring-2 focus:ring-brand-200 dark:focus:ring-brand-900/50 transition-all cursor-pointer"
           >
             {MONTH_NAMES.map((m, i) => (
               <option key={i} value={i}>{m}</option>
@@ -318,7 +318,7 @@ export default function AnalyticsDashboard({ allData, year }: Props) {
           <select
             value={compare}
             onChange={(e) => setCompare(Number(e.target.value))}
-            className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-800 dark:text-gray-100 text-sm font-semibold rounded-xl px-4 py-2 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:focus:ring-brand-900/50 transition-all cursor-pointer"
+            className="bg-white dark:bg-[#15151A] border border-gray-200 dark:border-white/10 text-gray-800 dark:text-gray-100 text-sm font-semibold rounded-xl px-4 py-2 outline-none focus:border-brand-400 focus:ring-2 focus:ring-brand-100 dark:focus:ring-brand-900/50 transition-all cursor-pointer"
           >
             {MONTH_NAMES.map((m, i) => (
               <option key={i} value={i}>{m}</option>
@@ -335,7 +335,7 @@ export default function AnalyticsDashboard({ allData, year }: Props) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
           </div>
-          <p className="font-display text-xl font-semibold text-gray-700 dark:text-gray-300 mb-1">
+          <p className="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-1">
             Sem dados para {MONTH_NAMES[primary]}
           </p>
           <p className="text-sm text-gray-400 dark:text-gray-500">
@@ -444,9 +444,9 @@ export default function AnalyticsDashboard({ allData, year }: Props) {
           <YearChart allData={allData} year={year} primary={primary} compare={compare} />
 
           {/* Comparison table */}
-          <div className="bg-white dark:bg-gray-800 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-card overflow-hidden">
-            <div className="px-5 py-4 border-b border-gray-100 dark:border-gray-700/60 flex items-center gap-3">
-              <h3 className="font-display text-base font-bold text-gray-700 dark:text-gray-200 flex-1">
+          <div className="bg-white dark:bg-[#15151A] rounded-2xl border border-gray-100 dark:border-white/5 shadow-card overflow-hidden">
+            <div className="px-5 py-4 border-b border-gray-100 dark:border-white/5 flex items-center gap-3">
+              <h3 className="text-base font-bold text-gray-700 dark:text-gray-200 flex-1">
                 Comparativo Detalhado
               </h3>
               <span className="text-xs font-semibold text-brand-600 dark:text-brand-400 bg-brand-50 dark:bg-brand-950/40 px-2.5 py-1 rounded-full">
@@ -461,7 +461,7 @@ export default function AnalyticsDashboard({ allData, year }: Props) {
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="bg-gray-50 dark:bg-gray-700/40">
+                  <tr className="bg-gray-50 dark:bg-white/[0.04]">
                     <th className="py-2.5 px-4 text-[11px] font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500 text-left w-1/3">
                       Métrica
                     </th>
@@ -476,7 +476,7 @@ export default function AnalyticsDashboard({ allData, year }: Props) {
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 dark:divide-gray-700/50">
+                <tbody className="divide-y divide-gray-100 dark:divide-white/5">
                   {/* Inputs */}
                   <tr className="bg-brand-50/40 dark:bg-brand-950/20">
                     <td colSpan={4} className="px-4 py-1.5 text-[10px] font-bold uppercase tracking-widest text-brand-500 dark:text-brand-600">

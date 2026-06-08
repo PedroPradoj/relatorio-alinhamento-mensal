@@ -76,7 +76,7 @@ export default function ClientSelector({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50/20 to-stone-100 dark:from-[#0B0B0D] dark:via-[#101013] dark:to-[#0B0B0D] transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50/20 to-stone-100 dark:from-[#0D0D0F] dark:via-[#101013] dark:to-[#0D0D0F] transition-colors duration-300">
       {/* Header */}
       <header className="bg-[#101013] border-b border-brand-700/50 shadow-2xl">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -88,7 +88,7 @@ export default function ClientSelector({
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl font-extrabold text-white leading-tight tracking-tight">
+                <h1 className="font-display text-xl sm:text-2xl font-bold text-white leading-tight tracking-tight">
                   Relatório Mensal
                 </h1>
                 <p className="text-brand-300 text-sm font-medium mt-0.5">
@@ -129,7 +129,7 @@ export default function ClientSelector({
             </p>
             <button
               onClick={() => setShowModal(true)}
-              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-500 text-white font-bold hover:opacity-90 transition-all shadow-lg shadow-brand-200 dark:shadow-brand-900/30"
+              className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gradient-to-r from-brand-400 to-brand-500 text-[#1A1306] font-semibold hover:shadow-gold transition-all"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -149,7 +149,7 @@ export default function ClientSelector({
               {clientList.map((client) => (
                 <div
                   key={client.id}
-                  className="group bg-white dark:bg-gray-800 rounded-3xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden cursor-pointer ring-1 ring-transparent hover:ring-brand-300 dark:hover:ring-brand-800"
+                  className="group bg-white dark:bg-[#15151A] rounded-2xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden cursor-pointer border border-gray-100 dark:border-white/5 hover:border-brand-300 dark:hover:border-brand-700/40"
                   onClick={() => onSelect(client)}
                 >
                   <div className="p-6 flex flex-col gap-4">
@@ -236,7 +236,7 @@ export default function ClientSelector({
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
           onClick={(e) => e.target === e.currentTarget && setDeleteConfirm(null)}
         >
-          <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl w-full max-w-sm p-8 flex flex-col gap-6">
+          <div className="bg-white dark:bg-[#15151A] rounded-2xl border border-gray-100 dark:border-white/5 shadow-2xl w-full max-w-sm p-8 flex flex-col gap-6">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 rounded-2xl bg-red-100 dark:bg-red-900/40 flex items-center justify-center shrink-0">
                 <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

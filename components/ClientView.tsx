@@ -118,8 +118,8 @@ function MonthViewCard({
 
   return (
     <div
-      className={`bg-white dark:bg-gray-800 rounded-3xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden flex flex-col ${
-        hasData ? "ring-1 ring-brand-200 dark:ring-brand-900/60" : ""
+      className={`bg-white dark:bg-[#15151A] rounded-2xl border border-gray-100 dark:border-white/5 shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden flex flex-col ${
+        hasData ? "ring-1 ring-brand-200 dark:ring-brand-800/50" : ""
       }`}
     >
       <div className="bg-[#16161A] border-b border-brand-600/40 px-5 py-4 flex items-center justify-between">
@@ -256,7 +256,7 @@ function SumCard({ label, value, color }: { label: string; value: string; color:
   return (
     <div className={`rounded-2xl bg-gradient-to-br border px-4 py-3 ${colorMap[color]}`}>
       <p className="text-xs font-semibold uppercase tracking-wide opacity-70 mb-1">{label}</p>
-      <p className="text-lg font-extrabold leading-tight">{value}</p>
+      <p className="text-lg font-extrabold tabular-nums leading-tight">{value}</p>
     </div>
   );
 }
@@ -295,7 +295,7 @@ export default function ClientView({ clientName, initialData }: ClientViewProps)
     val === 0 ? "—" : new Intl.NumberFormat("pt-BR").format(val);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50/20 to-stone-100 dark:from-[#0B0B0D] dark:via-[#101013] dark:to-[#0B0B0D] transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50/20 to-stone-100 dark:from-[#0D0D0F] dark:via-[#101013] dark:to-[#0D0D0F] transition-colors duration-300">
       <header className="bg-[#101013] border-b border-brand-700/50 shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
@@ -306,7 +306,7 @@ export default function ClientView({ clientName, initialData }: ClientViewProps)
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl font-extrabold text-white leading-tight tracking-tight">
+                <h1 className="font-display text-xl sm:text-2xl font-bold text-white leading-tight tracking-tight">
                   {clientName}
                 </h1>
                 <p className="text-brand-300 text-sm font-medium mt-0.5">

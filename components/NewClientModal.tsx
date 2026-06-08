@@ -26,7 +26,7 @@ export default function NewClientModal({ onConfirm, onClose }: NewClientModalPro
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl w-full max-w-md p-8 flex flex-col gap-6">
+      <div className="bg-white dark:bg-[#15151A] rounded-2xl border border-gray-100 dark:border-white/5 shadow-2xl w-full max-w-md p-8 flex flex-col gap-6">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-2xl bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center">
             <svg className="w-5 h-5 text-brand-600 dark:text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -65,7 +65,7 @@ export default function NewClientModal({ onConfirm, onClose }: NewClientModalPro
           <button
             onClick={handleSubmit}
             disabled={!name.trim()}
-            className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 text-white text-sm font-semibold hover:opacity-90 disabled:opacity-40 disabled:cursor-not-allowed transition-all shadow-lg shadow-brand-200 dark:shadow-brand-900/30"
+            className="flex-1 py-2.5 rounded-lg bg-gradient-to-r from-brand-400 to-brand-500 text-[#1A1306] text-sm font-semibold hover:shadow-gold disabled:opacity-40 disabled:cursor-not-allowed transition-all"
           >
             Criar Cliente
           </button>

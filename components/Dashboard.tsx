@@ -71,7 +71,7 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
 
   if (!hydrated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-stone-50 dark:bg-[#0B0B0D]">
+      <div className="min-h-screen flex items-center justify-center bg-stone-50 dark:bg-[#0D0D0F]">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-4 border-brand-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-gray-500 dark:text-gray-400 text-sm">Carregando...</p>
@@ -81,7 +81,7 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50/20 to-stone-100 dark:from-[#0B0B0D] dark:via-[#101013] dark:to-[#0B0B0D] transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50/20 to-stone-100 dark:from-[#0D0D0F] dark:via-[#101013] dark:to-[#0D0D0F] transition-colors duration-300">
       {/* Header */}
       <header className="bg-[#101013] border-b border-brand-700/50 shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -106,7 +106,7 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
                 </svg>
               </div>
               <div>
-                <h1 className="text-xl sm:text-2xl font-extrabold text-white leading-tight tracking-tight">
+                <h1 className="font-display text-xl sm:text-2xl font-bold text-white leading-tight tracking-tight">
                   {clientName}
                 </h1>
                 <p className="text-brand-300 text-sm font-medium mt-0.5">
@@ -203,7 +203,7 @@ function SumCard({
   return (
     <div className={`rounded-2xl bg-gradient-to-br border px-4 py-3 ${colorMap[color]}`}>
       <p className="text-xs font-semibold uppercase tracking-wide opacity-70 mb-1">{label}</p>
-      <p className="text-lg font-extrabold leading-tight">{value}</p>
+      <p className="text-lg font-extrabold tabular-nums leading-tight">{value}</p>
     </div>
   );
 }

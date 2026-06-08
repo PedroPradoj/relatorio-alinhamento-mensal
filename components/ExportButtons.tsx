@@ -43,7 +43,7 @@ export default function ExportButtons({ data, year }: ExportButtonsProps) {
       <button
         onClick={handlePDF}
         disabled={loadingPDF}
-        className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/20 hover:bg-white/30 text-white text-sm font-semibold transition-all disabled:opacity-60 disabled:cursor-not-allowed border border-white/20"
+        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-brand-400 to-brand-500 text-[#1A1306] text-sm font-semibold hover:shadow-gold transition-all disabled:opacity-60 disabled:cursor-not-allowed"
       >
         {loadingPDF ? (
           <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">

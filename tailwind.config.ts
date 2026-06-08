@@ -43,6 +43,8 @@ const config: Config = {
       boxShadow: {
         card: "0 4px 24px rgba(0,0,0,0.07)",
         "card-hover": "0 8px 32px rgba(0,0,0,0.12)",
+        gold: "0 4px 16px rgba(201,151,58,0.35)",
+        "gold-lg": "0 6px 24px rgba(201,151,58,0.45)",
       },
     },
   },
