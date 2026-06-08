@@ -10,20 +10,29 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["DM Sans", "system-ui", "sans-serif"],
+        serif: ["Cormorant Garamond", "Georgia", "serif"],
+        display: ["Cormorant Garamond", "Georgia", "serif"],
       },
       colors: {
         brand: {
-          50: "#f5f3ff",
-          100: "#ede9fe",
-          200: "#ddd6fe",
-          300: "#c4b5fd",
-          400: "#a78bfa",
-          500: "#8b5cf6",
-          600: "#7c3aed",
-          700: "#6d28d9",
-          800: "#5b21b6",
-          900: "#4c1d95",
+          50: "#FAF6EC",
+          100: "#F3E9CF",
+          200: "#E8D29F",
+          300: "#DCBB6F",
+          400: "#D2A84D",
+          500: "#C9973A",
+          600: "#AC7F2E",
+          700: "#876225",
+          800: "#66491D",
+          900: "#463213",
+          950: "#2A1D0A",
+        },
+        luxe: {
+          950: "#0B0B0D",
+          900: "#101013",
+          800: "#16161A",
+          700: "#1E1E24",
         },
       },
       borderRadius: {

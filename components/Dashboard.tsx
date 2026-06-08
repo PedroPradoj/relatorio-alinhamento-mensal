@@ -69,9 +69,9 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
 
   if (!hydrated) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+      <div className="min-h-screen flex items-center justify-center bg-stone-50 dark:bg-[#0B0B0D]">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-10 h-10 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-10 h-10 border-4 border-brand-500 border-t-transparent rounded-full animate-spin" />
           <p className="text-gray-500 dark:text-gray-400 text-sm">Carregando...</p>
         </div>
       </div>
@@ -79,9 +79,9 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50/20 to-stone-100 dark:from-[#0B0B0D] dark:via-[#101013] dark:to-[#0B0B0D] transition-colors duration-300">
       {/* Header */}
-      <header className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 shadow-2xl">
+      <header className="bg-[#101013] border-b border-brand-700/50 shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
             <div className="flex items-center gap-3">
@@ -107,7 +107,7 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
                 <h1 className="text-xl sm:text-2xl font-extrabold text-white leading-tight tracking-tight">
                   {clientName}
                 </h1>
-                <p className="text-indigo-200 text-sm font-medium mt-0.5">
+                <p className="text-brand-300 text-sm font-medium mt-0.5">
                   Relatório Mensal · Meta Ads
                 </p>
               </div>
@@ -127,9 +127,9 @@ export default function Dashboard({ clientId, clientName, onBack }: DashboardPro
         <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur border-b border-gray-200 dark:border-gray-700 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <SumCard label="Total Investido" value={formatBRL(totalInvestimento)} color="indigo" />
+              <SumCard label="Total Investido" value={formatBRL(totalInvestimento)} color="brand" />
               <SumCard label="Total Faturamento" value={formatBRL(totalFaturamento)} color="emerald" />
-              <SumCard label="Total Mensagens" value={formatNum(totalMensagens)} color="purple" />
+              <SumCard label="Total Mensagens" value={formatNum(totalMensagens)} color="brand" />
               <SumCard label="Total Vendas" value={formatNum(totalVendas)} color="amber" />
             </div>
           </div>
@@ -166,12 +166,11 @@ function SumCard({
 }: {
   label: string;
   value: string;
-  color: "indigo" | "emerald" | "purple" | "amber";
+  color: "brand" | "emerald" | "amber";
 }) {
   const colorMap = {
-    indigo: "from-indigo-50 to-indigo-100 dark:from-indigo-950/60 dark:to-indigo-900/40 text-indigo-700 dark:text-indigo-300 border-indigo-200 dark:border-indigo-800/60",
+    brand: "from-brand-50 to-brand-100 dark:from-brand-950/60 dark:to-brand-900/40 text-brand-700 dark:text-brand-300 border-brand-200 dark:border-brand-800/60",
     emerald: "from-emerald-50 to-emerald-100 dark:from-emerald-950/60 dark:to-emerald-900/40 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/60",
-    purple: "from-purple-50 to-purple-100 dark:from-purple-950/60 dark:to-purple-900/40 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800/60",
     amber: "from-amber-50 to-amber-100 dark:from-amber-950/60 dark:to-amber-900/40 text-amber-700 dark:text-amber-300 border-amber-200 dark:border-amber-800/60",
   };
 

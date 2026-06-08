@@ -13,11 +13,11 @@ interface ClientSelectorProps {
 }
 
 const AVATAR_COLORS = [
-  "from-indigo-400 to-purple-500",
+  "from-brand-500 to-brand-700",
   "from-emerald-400 to-teal-500",
   "from-orange-400 to-rose-500",
   "from-sky-400 to-blue-500",
-  "from-violet-400 to-fuchsia-500",
+  "from-amber-400 to-brand-600",
   "from-amber-400 to-orange-500",
 ];
 
@@ -76,9 +76,9 @@ export default function ClientSelector({
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-indigo-50 to-purple-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
+    <div className="min-h-screen bg-gradient-to-br from-stone-100 via-amber-50/20 to-stone-100 dark:from-[#0B0B0D] dark:via-[#101013] dark:to-[#0B0B0D] transition-colors duration-300">
       {/* Header */}
-      <header className="bg-gradient-to-r from-indigo-600 via-purple-600 to-indigo-700 shadow-2xl">
+      <header className="bg-[#101013] border-b border-brand-700/50 shadow-2xl">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="py-5 flex items-center justify-between">
             <div className="flex items-center gap-4">
@@ -91,7 +91,7 @@ export default function ClientSelector({
                 <h1 className="text-xl sm:text-2xl font-extrabold text-white leading-tight tracking-tight">
                   Relatório Mensal
                 </h1>
-                <p className="text-indigo-200 text-sm font-medium mt-0.5">
+                <p className="text-brand-300 text-sm font-medium mt-0.5">
                   Meta Ads · Social Media Manager
                 </p>
               </div>
@@ -100,7 +100,7 @@ export default function ClientSelector({
               <ThemeToggle />
               <button
                 onClick={() => setShowModal(true)}
-                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-indigo-600 text-sm font-bold hover:bg-indigo-50 transition-all shadow-lg"
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white text-brand-700 text-sm font-bold hover:bg-brand-50 transition-all shadow-lg"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -116,8 +116,8 @@ export default function ClientSelector({
         {clientList.length === 0 ? (
           /* Empty state */
           <div className="flex flex-col items-center justify-center py-24 text-center">
-            <div className="w-20 h-20 rounded-3xl bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center mb-6">
-              <svg className="w-10 h-10 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="w-20 h-20 rounded-3xl bg-brand-100 dark:bg-brand-900/40 flex items-center justify-center mb-6">
+              <svg className="w-10 h-10 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </div>
@@ -129,7 +129,7 @@ export default function ClientSelector({
             </p>
             <button
               onClick={() => setShowModal(true)}
-              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-bold hover:opacity-90 transition-all shadow-lg shadow-indigo-200 dark:shadow-indigo-900/30"
+              className="flex items-center gap-2 px-6 py-3 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-500 text-white font-bold hover:opacity-90 transition-all shadow-lg shadow-brand-200 dark:shadow-brand-900/30"
             >
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
@@ -149,7 +149,7 @@ export default function ClientSelector({
               {clientList.map((client) => (
                 <div
                   key={client.id}
-                  className="group bg-white dark:bg-gray-800 rounded-3xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden cursor-pointer ring-1 ring-transparent hover:ring-indigo-200 dark:hover:ring-indigo-800"
+                  className="group bg-white dark:bg-gray-800 rounded-3xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden cursor-pointer ring-1 ring-transparent hover:ring-brand-300 dark:hover:ring-brand-800"
                   onClick={() => onSelect(client)}
                 >
                   <div className="p-6 flex flex-col gap-4">
@@ -171,7 +171,7 @@ export default function ClientSelector({
                           className={`w-8 h-8 rounded-xl flex items-center justify-center transition-all ${
                             copiedId === client.id
                               ? "bg-emerald-100 dark:bg-emerald-900/40 text-emerald-500"
-                              : "text-gray-300 dark:text-gray-600 hover:bg-indigo-50 dark:hover:bg-indigo-950/40 hover:text-indigo-500 dark:hover:text-indigo-400"
+                              : "text-gray-300 dark:text-gray-600 hover:bg-brand-50 dark:hover:bg-brand-950/40 hover:text-brand-500 dark:hover:text-brand-400"
                           }`}
                           aria-label="Copiar link do cliente"
                         >
@@ -211,7 +211,7 @@ export default function ClientSelector({
                       </p>
                     </div>
 
-                    <div className="flex items-center gap-1.5 text-indigo-500 dark:text-indigo-400 text-xs font-semibold group-hover:gap-2.5 transition-all">
+                    <div className="flex items-center gap-1.5 text-brand-500 dark:text-brand-400 text-xs font-semibold group-hover:gap-2.5 transition-all">
                       <span>Ver relatórios</span>
                       <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />

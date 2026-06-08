@@ -102,15 +102,15 @@ export default function MonthCard({
   return (
     <div
       className={`bg-white dark:bg-gray-800 rounded-3xl shadow-card hover:shadow-card-hover transition-all duration-300 overflow-hidden flex flex-col ${
-        hasData ? "ring-1 ring-indigo-100 dark:ring-indigo-900/60" : ""
+        hasData ? "ring-1 ring-brand-200 dark:ring-brand-900/60" : ""
       }`}
     >
       {/* Month Header */}
-      <div className="bg-gradient-to-r from-indigo-500 to-purple-600 px-5 py-4 flex items-center justify-between">
+      <div className="bg-[#16161A] border-b border-brand-600/40 px-5 py-4 flex items-center justify-between">
         <div>
           <h3 className="text-white font-bold text-lg leading-none">{monthName}</h3>
           {hasData && (
-            <p className="text-indigo-200 text-xs mt-1">
+            <p className="text-brand-300 text-xs mt-1">
               Investimento: {inv > 0 ? formatCurrency(inv) : "—"}
             </p>
           )}
@@ -132,8 +132,8 @@ export default function MonthCard({
             className="w-full flex items-center justify-between mb-3 group"
           >
             <div className="flex items-center gap-2">
-              <div className="w-5 h-5 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 flex items-center justify-center">
-                <svg className="w-3 h-3 text-indigo-600 dark:text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-5 h-5 rounded-lg bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center">
+                <svg className="w-3 h-3 text-brand-600 dark:text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
               </div>
@@ -212,8 +212,8 @@ export default function MonthCard({
 
               {/* Calculated metrics */}
               {(inv > 0 || msg > 0 || clk > 0 || imp > 0) && (
-                <div className="bg-indigo-50 dark:bg-indigo-950/40 rounded-2xl px-4 py-3 mt-0.5">
-                  <p className="text-xs font-bold text-indigo-400 dark:text-indigo-500 uppercase tracking-wide mb-2">
+                <div className="bg-brand-50 dark:bg-brand-950/40 rounded-2xl px-4 py-3 mt-0.5">
+                  <p className="text-xs font-bold text-brand-600 dark:text-brand-500 uppercase tracking-wide mb-2">
                     Calculados
                   </p>
                   <CalcRow
