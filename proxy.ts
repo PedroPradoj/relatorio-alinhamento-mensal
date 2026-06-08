@@ -12,7 +12,11 @@ export function proxy(request: NextRequest) {
   }
 
   // Rotas públicas
-  if (pathname.startsWith("/login") || pathname.startsWith("/api/auth")) {
+  if (
+    pathname.startsWith("/login") ||
+    pathname.startsWith("/api/auth") ||
+    pathname.startsWith("/c/")
+  ) {
     return NextResponse.next();
   }
 
