@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { AllData, MonthData, MONTH_NAMES, EMPTY_MONTH } from "@/types";
 import {
   parseField,
@@ -18,6 +18,7 @@ import ComparisonBadge from "./ComparisonBadge";
 import ThemeToggle from "./ThemeToggle";
 import ExportButtons from "./ExportButtons";
 import YearSelector from "./YearSelector";
+import AnalyticsDashboard from "./AnalyticsDashboard";
 
 interface ClientViewProps {
   clientId: string;
@@ -45,22 +46,12 @@ function CalcRow({ label, value, prevValue, formatted, invertColors }: CalcRowPr
   );
 }
 
-function ReadOnlyRow({
-  label,
-  value,
-  badge,
-}: {
-  label: string;
-  value: string;
-  badge?: React.ReactNode;
-}) {
+function ReadOnlyRow({ label, value, badge }: { label: string; value: string; badge?: React.ReactNode }) {
   return (
     <div className="flex items-center justify-between py-1.5 border-b border-gray-100 dark:border-gray-700/60 last:border-0">
       <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">{label}</span>
       <div className="flex items-center gap-2">
-        <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">
-          {value || "—"}
-        </span>
+        <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">{value || "—"}</span>
         {badge}
       </div>
     </div>
@@ -131,22 +122,12 @@ function MonthViewCard({
             </p>
           )}
         </div>
-        <span
-          className={`w-2.5 h-2.5 rounded-full ${
-            hasData
-              ? "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]"
-              : "bg-white/30"
-          }`}
-        />
+        <span className={`w-2.5 h-2.5 rounded-full ${hasData ? "bg-emerald-400 shadow-[0_0_6px_rgba(52,211,153,0.8)]" : "bg-white/30"}`} />
       </div>
 
       <div className="p-5 flex flex-col gap-4 flex-1">
-        {/* Campanhas Meta Ads */}
         <div>
-          <button
-            onClick={() => setAdsOpen((v) => !v)}
-            className="w-full flex items-center justify-between mb-3"
-          >
+          <button onClick={() => setAdsOpen((v) => !v)} className="w-full flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <div className="w-5 h-5 rounded-lg bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center">
                 <svg className="w-3 h-3 text-brand-600 dark:text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -160,31 +141,11 @@ function MonthViewCard({
 
           {adsOpen && (
             <div className="flex flex-col gap-1">
-              <ReadOnlyRow
-                label="Investimento"
-                value={inv > 0 ? formatCurrency(inv) : ""}
-                badge={prevInv !== null ? <ComparisonBadge current={inv} previous={prevInv} invertColors /> : undefined}
-              />
-              <ReadOnlyRow
-                label="Mensagens"
-                value={data.mensagens}
-                badge={prevMsg !== null ? <ComparisonBadge current={msg} previous={prevMsg} /> : undefined}
-              />
-              <ReadOnlyRow
-                label="Impressões"
-                value={data.impressoes}
-                badge={prevImp !== null ? <ComparisonBadge current={imp} previous={prevImp} /> : undefined}
-              />
-              <ReadOnlyRow
-                label="Cliques"
-                value={data.cliques}
-                badge={prevClk !== null ? <ComparisonBadge current={clk} previous={prevClk} /> : undefined}
-              />
-              <ReadOnlyRow
-                label="Hook Rate"
-                value={data.hookRate ? `${data.hookRate}%` : ""}
-                badge={prevHook !== null ? <ComparisonBadge current={parseField(data.hookRate)} previous={prevHook} /> : undefined}
-              />
+              <ReadOnlyRow label="Investimento" value={inv > 0 ? formatCurrency(inv) : ""} badge={prevInv !== null ? <ComparisonBadge current={inv} previous={prevInv} invertColors /> : undefined} />
+              <ReadOnlyRow label="Mensagens" value={data.mensagens} badge={prevMsg !== null ? <ComparisonBadge current={msg} previous={prevMsg} /> : undefined} />
+              <ReadOnlyRow label="Impressões" value={data.impressoes} badge={prevImp !== null ? <ComparisonBadge current={imp} previous={prevImp} /> : undefined} />
+              <ReadOnlyRow label="Cliques" value={data.cliques} badge={prevClk !== null ? <ComparisonBadge current={clk} previous={prevClk} /> : undefined} />
+              <ReadOnlyRow label="Hook Rate" value={data.hookRate ? `${data.hookRate}%` : ""} badge={prevHook !== null ? <ComparisonBadge current={parseField(data.hookRate)} previous={prevHook} /> : undefined} />
 
               {(inv > 0 || msg > 0 || clk > 0 || imp > 0) && (
                 <div className="bg-brand-50 dark:bg-brand-950/40 rounded-2xl px-4 py-3 mt-2">
@@ -202,12 +163,8 @@ function MonthViewCard({
 
         <div className="border-t border-gray-100 dark:border-gray-700/60" />
 
-        {/* Vendas */}
         <div>
-          <button
-            onClick={() => setSalesOpen((v) => !v)}
-            className="w-full flex items-center justify-between mb-3"
-          >
+          <button onClick={() => setSalesOpen((v) => !v)} className="w-full flex items-center justify-between mb-3">
             <div className="flex items-center gap-2">
               <div className="w-5 h-5 rounded-lg bg-emerald-100 dark:bg-emerald-900/40 flex items-center justify-center">
                 <svg className="w-3 h-3 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -221,16 +178,8 @@ function MonthViewCard({
 
           {salesOpen && (
             <div className="flex flex-col gap-1">
-              <ReadOnlyRow
-                label="Faturamento"
-                value={fat > 0 ? formatCurrency(fat) : ""}
-                badge={prevFat !== null ? <ComparisonBadge current={fat} previous={prevFat} /> : undefined}
-              />
-              <ReadOnlyRow
-                label="Vendas"
-                value={data.vendas}
-                badge={prevVen !== null ? <ComparisonBadge current={ven} previous={prevVen} /> : undefined}
-              />
+              <ReadOnlyRow label="Faturamento" value={fat > 0 ? formatCurrency(fat) : ""} badge={prevFat !== null ? <ComparisonBadge current={fat} previous={prevFat} /> : undefined} />
+              <ReadOnlyRow label="Vendas" value={data.vendas} badge={prevVen !== null ? <ComparisonBadge current={ven} previous={prevVen} /> : undefined} />
 
               {(fat > 0 || ven > 0) && (
                 <div className="bg-emerald-50 dark:bg-emerald-950/40 rounded-2xl px-4 py-3 mt-2">
@@ -263,11 +212,10 @@ function SumCard({ label, value, color }: { label: string; value: string; color:
 
 export default function ClientView({ clientName, initialData }: ClientViewProps) {
   const [year, setYear] = useState(new Date().getFullYear());
+  const [view, setView] = useState<"dados" | "dashboard">("dados");
   const allData = initialData;
 
-  const getMonthData = (idx: number): MonthData =>
-    allData?.[year]?.[idx] ?? { ...EMPTY_MONTH };
-
+  const getMonthData = (idx: number): MonthData => allData?.[year]?.[idx] ?? { ...EMPTY_MONTH };
   const getPrevMonthData = (idx: number): MonthData | null => {
     if (idx === 0) return null;
     return allData?.[year]?.[idx - 1] ?? null;
@@ -287,10 +235,7 @@ export default function ClientView({ clientName, initialData }: ClientViewProps)
   const totalVendas = sumField("vendas");
 
   const formatBRL = (val: number) =>
-    val === 0
-      ? "—"
-      : new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(val);
-
+    val === 0 ? "—" : new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(val);
   const formatNum = (val: number) =>
     val === 0 ? "—" : new Intl.NumberFormat("pt-BR").format(val);
 
@@ -309,9 +254,7 @@ export default function ClientView({ clientName, initialData }: ClientViewProps)
                 <h1 className="font-display text-xl sm:text-2xl font-bold text-white leading-tight tracking-tight">
                   {clientName}
                 </h1>
-                <p className="text-brand-300 text-sm font-medium mt-0.5">
-                  Relatório Mensal · Meta Ads
-                </p>
+                <p className="text-brand-300 text-sm font-medium mt-0.5">Relatório Mensal · Meta Ads</p>
               </div>
             </div>
             <div className="flex items-center gap-2 flex-wrap">
@@ -323,7 +266,27 @@ export default function ClientView({ clientName, initialData }: ClientViewProps)
         </div>
       </header>
 
-      {(totalInvestimento > 0 || totalFaturamento > 0) && (
+      {/* Tab bar */}
+      <div className="bg-[#101013] border-b border-brand-700/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex gap-1">
+          {(["dados", "dashboard"] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setView(tab)}
+              className={`px-5 py-3 text-sm font-semibold capitalize transition-all border-b-2 ${
+                view === tab
+                  ? "border-brand-500 text-brand-400"
+                  : "border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-300 hover:border-gray-600"
+              }`}
+            >
+              {tab === "dados" ? "Dados" : "Dashboard"}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Summary bar */}
+      {view === "dados" && (totalInvestimento > 0 || totalFaturamento > 0) && (
         <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur border-b border-gray-200 dark:border-gray-700 shadow-sm">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
@@ -337,20 +300,25 @@ export default function ClientView({ clientName, initialData }: ClientViewProps)
       )}
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {Array.from({ length: 12 }, (_, i) => (
-            <MonthViewCard
-              key={i}
-              monthIndex={i}
-              monthData={getMonthData(i)}
-              previousMonthData={getPrevMonthData(i)}
-            />
-          ))}
-        </div>
-
-        <footer className="mt-12 text-center text-xs text-gray-400 dark:text-gray-600 pb-8">
-          {clientName} · Relatório de desempenho · {year}
-        </footer>
+        {view === "dados" ? (
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              {Array.from({ length: 12 }, (_, i) => (
+                <MonthViewCard
+                  key={i}
+                  monthIndex={i}
+                  monthData={getMonthData(i)}
+                  previousMonthData={getPrevMonthData(i)}
+                />
+              ))}
+            </div>
+            <footer className="mt-12 text-center text-xs text-gray-400 dark:text-gray-600 pb-8">
+              {clientName} · {year}
+            </footer>
+          </>
+        ) : (
+          <AnalyticsDashboard allData={allData} year={year} />
+        )}
       </main>
     </div>
   );

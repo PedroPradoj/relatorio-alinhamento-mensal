@@ -10,7 +10,7 @@ async function getClientData(clientId: string) {
   );
 
   const { data: clientRow, error: clientError } = await supabase
-    .from("clients")
+    .from("relatorio_clients")
     .select("id, name")
     .eq("id", clientId)
     .single();
@@ -18,7 +18,7 @@ async function getClientData(clientId: string) {
   if (clientError || !clientRow) return null;
 
   const { data: reports } = await supabase
-    .from("monthly_reports")
+    .from("relatorio_monthly_reports")
     .select("*")
     .eq("client_id", clientId);
 
