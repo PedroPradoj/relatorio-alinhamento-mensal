@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Client, ClientsIndex } from "@/types";
 import ThemeToggle from "./ThemeToggle";
 import NewClientModal from "./NewClientModal";
+import LogoutButton from "./LogoutButton";
 
 interface ClientSelectorProps {
   clients: ClientsIndex;
@@ -97,6 +98,7 @@ export default function ClientSelector({
               </div>
             </div>
             <div className="flex items-center gap-2">
+              <LogoutButton />
               <ThemeToggle />
               <button
                 onClick={() => setShowModal(true)}
